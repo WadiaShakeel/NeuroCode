@@ -62,7 +62,10 @@ RUN rm -rf build \
          -DNC_CLANG_INCLUDE=/usr/lib/llvm-18/include \
     && cmake --build build -j2 --target neurocode
 
-
+# ---------- Precompile the standard header so sandbox compiles are fast ----------
+RUN H=$(find /usr/include -path '*bits/stdc++.h' | head -1) \
+    && mkdir -p "$H.gch" \
+    && g++ -std=c++17 -O2 -x c++-header "$H" -o "$H.gch/O2_17.gch"
 # ---------- Deployment ----------
 COPY deploy/start.sh /app/start.sh
 
