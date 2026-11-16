@@ -23,8 +23,8 @@ Limits Limits::forBenchmark() {
 
 Limits Limits::forCompile() {
     Limits l;
-    l.cpu_seconds = 10;
-    l.wall_ms = 10000;
+    l.cpu_seconds = 60;
+    l.wall_ms = 60000;
     l.address_space_bytes = std::size_t(2) << 30;   // cc1plus on <bits/stdc++.h> needs a few hundred MB
     l.output_bytes = 64u << 10;
     l.file_write_bytes = std::size_t(64) << 20;     // the compiler writes the binary

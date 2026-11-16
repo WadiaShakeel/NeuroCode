@@ -275,7 +275,7 @@ Build buildProgram(const Ctx& c, Job& job, const ast::Node& root, const std::str
         b.message = cr.error_summary.empty() ? "g++ could not be started" : cr.error_summary;
         return b;
     }
-    if (cr.timed_out) return skipped("the compiler ran out of time");
+    if (cr.timed_out) { std::fprintf(stderr, "BUILD: compile timed out\n"); return skipped("the compiler ran out of time"); }
 
     // An error on a user line is the user's. One on a harness line means the signature does not fit the
     // operation (a return type or parameter the harness cannot use): the program cannot be tested, that is all.
